@@ -64,7 +64,7 @@
             overflow-x: hidden; 
         }
 
-        /* ================= نظام القص الدائري الحاسم لشاشة التحميل ================= */
+        /* ================= شاشة التحميل: التعديل الاحترافي النهائي بالملي ================= */
         #splash-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #000000; 
@@ -75,16 +75,16 @@
         
         .loader-content { text-align: center; padding: 20px; max-width: 90%; display: flex; flex-direction: column; align-items: center; }
         
-        /* تطبيق الفلتر الدائري الصافي والتحكم في إزاحة السنتر لتعويض الخطأ في الصورة الأصلية */
+        /* ضبط السنتر بدقة متناهية وزيادة القوة لعزل الفراغات الجانبية والسفلية */
         .loader-logo-final {
             width: 150px; 
             height: 150px; 
             margin-bottom: 25px;
             background-image: url('./images/logooo.png');
-            background-size: 150%; /* تكبير لتغطية أطراف المربعات كلياً */
-            background-position: center 46%; /* إزاحة ذكية لتعويض عدم تمركز اللوجو الأصلي لمنع ظهور أي بياض تحت أو يمين */
+            background-size: 158%; /* زيادة الزوم لتغطية الحواف بنسبة 100% */
+            background-position: center 48%; /* سنترة الارتفاع المائل برسم هندسي دقيق */
             background-repeat: no-repeat;
-            clip-path: circle(50% at 50% 50%); /* قص دائري حاد يمنع خروج أي فتفوتة بيضاء خارج حدود الدائرة */
+            clip-path: circle(50% at 50% 50%); /* القص الحديدي الصافي لمنع أي بياض */
             animation: bounceInEntry 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
             transform: scale(0);
         }
@@ -102,7 +102,7 @@
         .loading-bar span { display: block; width: 0; height: 100%; background: linear-gradient(90deg, var(--brand-orange) 0%, #f97316 100%); box-shadow: 0 0 8px var(--brand-orange); border-radius: 10px; }
         .splash-hidden { transform: translateY(-100%); pointer-events: none; }
 
-        /* ================= نظام القص الدائري الحاسم للهيدر الداخلي ================= */
+        /* ================= لوجو الهيدر الداخلي الاحترافي المطابق بالملي ================= */
         .sticky-wrapper { position: sticky; top: 0; z-index: 1000; background: var(--header-bg); box-shadow: 0 1px 10px rgba(0,0,0,0.03); }
         header { display: flex; flex-direction: column; align-items: center; padding: 14px 0; position: relative; }
         .header-top { width: 100%; display: flex; align-items: center; justify-content: center; position: relative; }
@@ -111,14 +111,14 @@
             width: 100px; 
             height: 100px; 
             background-image: url('./images/logooo.png');
-            background-size: 150%;
-            background-position: center 46%;
+            background-size: 158%;
+            background-position: center 48%;
             background-repeat: no-repeat;
             clip-path: circle(50% at 50% 50%);
             box-shadow: 0 4px 14px rgba(30, 41, 59, 0.04);
         }
         
-        /* أزرار الهيدر ومحاذاتها بدقة */
+        /* أزرار الهيدر */
         .header-left-actions { position: absolute; left: 16px; top: 44px; display: flex; align-items: center; }
         .header-right-actions { position: absolute; right: 16px; top: 44px; display: flex; align-items: center; }
 
@@ -335,7 +335,7 @@
 
         /* السلة والـ Modals */
         .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; display: none; justify-content: center; align-items: flex-end; backdrop-filter: blur(4px); }
-        .modal-content { background: var(--white); width: 100%; max-width: 480px; padding: 16px 20px; border-radius: 22px 22px 0 0; max-height: 82vh; overflow-y: auto; color: var(--main-text); box-shadow: 0 -5px 25px rgba(0,0,0,0.2); }
+        .modal-content { background: var(--white); width: 100%; max-width: 480px; padding: 16px 20px; border-radius: 22px 22px 0 0; max-height: 82vh; overflow-y: auto; color: var(--main-text); box-shadow: 0 -5px 25px rgba(0,0,0,0.25); }
 
         .cart-item-card { display: flex; align-items: center; gap: 10px; padding: 8px 10px; background: rgba(100, 116, 139, 0.06); border-radius: 12px; margin-bottom: 8px; }
         .cart-item-img { width: 42px; height: 42px; border-radius: 8px; object-fit: cover; }
@@ -373,7 +373,7 @@
 </head>
 <body>
 
-    <!-- شاشة التحميل السوداء المعالجة هندسياً بالقص الدائري المطلق لمنع البياض -->
+    <!-- شاشة التحميل السوداء باللوجو الدائري المعزول بنسبة 100% وبدون أي حواف مربعات -->
     <div id="splash-screen">
         <div class="loader-content">
             <div class="loader-logo-final"></div>
@@ -392,7 +392,7 @@
                 </button>
             </div>
 
-            <!-- حاوية اللوجو الدائرية المصلحة تماماً في أعلى الصفحة -->
+            <!-- حاوية لوجو الهيدر الدائري المطابق تماماً والمحمي من أطراف المربعات -->
             <div class="header-top">
                 <div class="header-logo-final"></div>
             </div>
