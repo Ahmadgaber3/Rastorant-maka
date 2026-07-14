@@ -64,7 +64,7 @@
             overflow-x: hidden; 
         }
 
-        /* ================= شاشة التحميل باللوجو الكامل المظهر 100% بدون قص الجوانب ================= */
+        /* ================= شاشة التحميل المعالجة بالملي بدون بياض جانبي نهائياً ================= */
         #splash-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #000000; 
@@ -75,26 +75,30 @@
         
         .loader-content { text-align: center; padding: 20px; max-width: 90%; display: flex; flex-direction: column; align-items: center; }
         
-        /* ضبط الحاوية الدائرية السوداء النظيفة بدون حواف ملونة مقطوعة */
+        /* إطار دبل دائري مخفي يعزل الأطراف البيضاء تماماً */
         .loader-logo-wrapper {
-            width: 170px; 
-            height: 170px; 
+            width: 155px; 
+            height: 155px; 
             border-radius: 50%; 
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             overflow: hidden; 
-            background-color: #000000; /* دمج مع خلفية الدخلة */
+            background-color: #000000; 
             display: flex;
             align-items: center;
             justify-content: center;
             animation: bounceInEntry 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
             transform: scale(0);
+            padding: 0;
+            border: none;
         }
 
-        /* إظهار الدائرة كاملة بالملي بدون أكل الأطراف الجانبية */
+        /* استخدام الضغط والتكبير الأقصى الموجه لإنهاء تداخل الفراغات الخلفية والمحافظة على الاستدارة الكاملة */
         .loader-logo-big {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* يمنع القص ويحافظ على أبعاد اللوجو الدائري سليمة بالكامل */
+            object-fit: cover; 
+            transform: scale(1.92); /* زوم متقدم وعميق جداً لقص الأطراف البيضاء برمجياً وبقاء اللوجو فقط كاملاً */
+            border-radius: 50%;
         }
         
         @keyframes bounceInEntry {
@@ -110,7 +114,7 @@
         .loading-bar span { display: block; width: 0; height: 100%; background: linear-gradient(90deg, var(--brand-orange) 0%, #f97316 100%); box-shadow: 0 0 8px var(--brand-orange); border-radius: 10px; }
         .splash-hidden { transform: translateY(-100%); pointer-events: none; }
 
-        /* ================= الهيدر الداخلي المصلح بنفس الطريقة المضمونة ================= */
+        /* ================= الهيدر الداخلي المصلح بنفس دقة الزوم والقص الاحترافي ================= */
         .sticky-wrapper { position: sticky; top: 0; z-index: 1000; background: var(--header-bg); box-shadow: 0 1px 10px rgba(0,0,0,0.03); }
         header { display: flex; flex-direction: column; align-items: center; padding: 14px 0; position: relative; }
         .header-top { width: 100%; display: flex; align-items: center; justify-content: center; position: relative; }
@@ -124,13 +128,16 @@
             display: flex; 
             align-items: center; 
             justify-content: center;
-            background-color: transparent; 
+            background-color: #ffffff; 
             border: 1px solid var(--border-color);
+            padding: 0;
         }
         .header-logo { 
             width: 100%; 
             height: 100%; 
-            object-fit: contain; /* إظهار اللوجو كاملاً في الهيدر بدون كشط حواف الدائرة */
+            object-fit: cover; 
+            transform: scale(1.92); 
+            border-radius: 50%;
         }
         
         /* أزرار الهيدر */
@@ -388,7 +395,7 @@
 </head>
 <body>
 
-    <!-- شاشة التحميل السوداء باللوجو الدائري السليم كاملاً -->
+    <!-- شاشة التحميل السوداء باللوجو الدائري المعالج كلياً بالابعاد الصافية -->
     <div id="splash-screen">
         <div class="loader-content">
             <div class="loader-logo-wrapper">
@@ -409,7 +416,7 @@
                 </button>
             </div>
 
-            <!-- حاوية اللوجو الدائرية السليمة تماماً بالمنظر الكامل -->
+            <!-- حاوية اللوجو الدائرية السليمة تماماً بالمنظر الكامل والمعالج بالزوم الصافي -->
             <div class="header-top">
                 <div class="header-logo-container">
                     <img src="./images/logooo.png" class="header-logo" alt="لوجو مطعم مكة">
