@@ -64,7 +64,7 @@
             overflow-x: hidden; 
         }
 
-        /* ================= شاشة التحميل باللوجو المكبر وبدون خط أورنج ================= */
+        /* ================= شاشة التحميل باللوجو الكامل المظهر 100% بدون قص الجوانب ================= */
         #splash-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #000000; 
@@ -75,14 +75,14 @@
         
         .loader-content { text-align: center; padding: 20px; max-width: 90%; display: flex; flex-direction: column; align-items: center; }
         
-        /* تم إزالة الإطار والظل البرتقالي هنا بالكامل وجعل الحاوية دائرية نظيفة */
+        /* ضبط الحاوية الدائرية السوداء النظيفة بدون حواف ملونة مقطوعة */
         .loader-logo-wrapper {
-            width: 160px; 
-            height: 160px; 
+            width: 170px; 
+            height: 170px; 
             border-radius: 50%; 
             margin-bottom: 20px;
             overflow: hidden; 
-            background-color: #ffffff;
+            background-color: #000000; /* دمج مع خلفية الدخلة */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -90,12 +90,11 @@
             transform: scale(0);
         }
 
-        /* زيادة الزووم للتكبير الكامل ليمتد اللوجو على قد الدائرة ولا يترك أي خلفية بيضاء */
+        /* إظهار الدائرة كاملة بالملي بدون أكل الأطراف الجانبية */
         .loader-logo-big {
             width: 100%;
             height: 100%;
-            object-fit: contain;
-            transform: scale(1.68); 
+            object-fit: contain; /* يمنع القص ويحافظ على أبعاد اللوجو الدائري سليمة بالكامل */
         }
         
         @keyframes bounceInEntry {
@@ -111,7 +110,7 @@
         .loading-bar span { display: block; width: 0; height: 100%; background: linear-gradient(90deg, var(--brand-orange) 0%, #f97316 100%); box-shadow: 0 0 8px var(--brand-orange); border-radius: 10px; }
         .splash-hidden { transform: translateY(-100%); pointer-events: none; }
 
-        /* ================= الهيدر مع جلب التحديث والتكبير للوجو الداخلي أيضاً ================= */
+        /* ================= الهيدر الداخلي المصلح بنفس الطريقة المضمونة ================= */
         .sticky-wrapper { position: sticky; top: 0; z-index: 1000; background: var(--header-bg); box-shadow: 0 1px 10px rgba(0,0,0,0.03); }
         header { display: flex; flex-direction: column; align-items: center; padding: 14px 0; position: relative; }
         .header-top { width: 100%; display: flex; align-items: center; justify-content: center; position: relative; }
@@ -125,14 +124,13 @@
             display: flex; 
             align-items: center; 
             justify-content: center;
-            background-color: #ffffff; 
+            background-color: transparent; 
             border: 1px solid var(--border-color);
         }
         .header-logo { 
             width: 100%; 
             height: 100%; 
-            object-fit: contain; 
-            transform: scale(1.68); 
+            object-fit: contain; /* إظهار اللوجو كاملاً في الهيدر بدون كشط حواف الدائرة */
         }
         
         /* أزرار الهيدر */
@@ -327,8 +325,6 @@
 
         /* =================================================================================== */
 
-        .fly-item { position: fixed; z-index: 9999; pointer-events: none; width: 22px; height: 22px; background: var(--brand-orange); color: #ffffff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1); }
-        
         .restaurant-footer { padding: 25px 15px; text-align: center; background: var(--white); border-top: 1px solid var(--border-color); margin-top: 25px; padding-bottom: 35px; }
         
         .footer-address-bar {
@@ -392,7 +388,7 @@
 </head>
 <body>
 
-    <!-- شاشة التحميل السوداء باللوجو الدائري الكبير والمعدل بالكامل -->
+    <!-- شاشة التحميل السوداء باللوجو الدائري السليم كاملاً -->
     <div id="splash-screen">
         <div class="loader-content">
             <div class="loader-logo-wrapper">
@@ -413,7 +409,7 @@
                 </button>
             </div>
 
-            <!-- حاوية اللوجو الدائرية الكبيرة من جوه والمعدلة بالكامل -->
+            <!-- حاوية اللوجو الدائرية السليمة تماماً بالمنظر الكامل -->
             <div class="header-top">
                 <div class="header-logo-container">
                     <img src="./images/logooo.png" class="header-logo" alt="لوجو مطعم مكة">
@@ -501,7 +497,6 @@
         let menuData = [], cart = [];
         let currentTotal = 0; 
         let selectedOrderType = 'دليفري'; 
-        let deferredPrompt = null;
 
         const deliveryLocations = [
             { name: "فيصل", price: 20 }, { name: "الأمل", price: 20 }, { name: "الصباح", price: 25 },
@@ -519,7 +514,6 @@
 
         window.addEventListener('DOMContentLoaded', () => {
             loadMenu();
-            initInstallCheck();
             updateThemeUI(savedTheme);
             renderLocationsList();
 
@@ -706,7 +700,7 @@
                     if(priceVal && typeof priceVal === 'string' && priceVal.trim() !== "" && priceVal !== "0") {
                         const cleanPrice = cleanPriceValue(priceVal);
                         if(cleanPrice > 0) {
-                            if(!firstSelectedSize) { SchuylerSize = sizeName; firstSelectedSize = sizeName; firstSelectedPrice = cleanPrice; }
+                            if(!firstSelectedSize) { firstSelectedSize = sizeName; firstSelectedPrice = cleanPrice; }
                             sizeButtons += `<span class="size-option ${firstSelectedSize === sizeName ? 'selected' : ''}" onclick="selectItemSize(this, ${item.id}, '${sizeName}', ${cleanPrice})">${sizeName}</span>`;
                         }
                     }
@@ -817,8 +811,6 @@
             }
             updateCart();
         }
-
-        function initInstallCheck() {}
     </script>
 </body>
 </html>
