@@ -64,7 +64,7 @@
             overflow-x: hidden; 
         }
 
-        /* ================= شاشة التحميل: الضبط الميكروسكوبي النهائي ================= */
+        /* ================= شاشة التحميل: اللوجو المربع الكبير المطور بالكامل ================= */
         #splash-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #000000; 
@@ -75,18 +75,19 @@
         
         .loader-content { text-align: center; padding: 20px; max-width: 90%; display: flex; flex-direction: column; align-items: center; }
         
-        /* إغلاق الفراغ السفلي والأيمن بالملي الفعلي عبر ضبط موجه دقيق */
+        /* تحويل الحاوية لمربع كبير فخم بدون حواف دائرية وبدون قص للأطراف */
         .loader-logo-final {
-            width: 150px; 
-            height: 150px; 
+            width: 180px; /* تكبير حجم اللوجو المربع */
+            height: 180px; 
             margin-bottom: 25px;
             background-image: url('./images/logooo.png');
-            background-size: 162%; /* زيادة ميكروسكوبية لإخفاء الحافة تماماً */
-            background-position: center 49.5%; /* موازنة هندسية دقيقة للميل الداخلي بالصورة */
+            background-size: contain; /* إظهار الصورة المربعة بالكامل بالملي */
+            background-position: center;
             background-repeat: no-repeat;
-            clip-path: circle(50% at 50% 50%); /* القص الحديدي المطلق لمنع أي زيادات خارج المحيط الدائري */
+            border-radius: 12px; /* شطرة خفيفة جداً وأنيقة للزوايا للحفاظ على المربع */
             animation: bounceInEntry 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
             transform: scale(0);
+            box-shadow: 0 8px 24px rgba(230, 81, 0, 0.15);
         }
         
         @keyframes bounceInEntry {
@@ -102,25 +103,26 @@
         .loading-bar span { display: block; width: 0; height: 100%; background: linear-gradient(90deg, var(--brand-orange) 0%, #f97316 100%); box-shadow: 0 0 8px var(--brand-orange); border-radius: 10px; }
         .splash-hidden { transform: translateY(-100%); pointer-events: none; }
 
-        /* ================= لوجو الهيدر الداخلي المطابق والمحمي ================= */
+        /* ================= الهيدر الداخلي: اللوجو المربع الكبير المتناسق ================= */
         .sticky-wrapper { position: sticky; top: 0; z-index: 1000; background: var(--header-bg); box-shadow: 0 1px 10px rgba(0,0,0,0.03); }
         header { display: flex; flex-direction: column; align-items: center; padding: 14px 0; position: relative; }
         .header-top { width: 100%; display: flex; align-items: center; justify-content: center; position: relative; }
         
+        /* جعل لوجو الهيدر مربعاً كبيراً ومتناسقاً تماماً مع لوجو الدخلة */
         .header-logo-final { 
-            width: 100px; 
-            height: 100px; 
+            width: 120px; /* تكبير حجم اللوجو المربع داخل الموقع */
+            height: 120px; 
             background-image: url('./images/logooo.png');
-            background-size: 162%;
-            background-position: center 49.5%;
+            background-size: contain;
+            background-position: center;
             background-repeat: no-repeat;
-            clip-path: circle(50% at 50% 50%);
-            box-shadow: 0 4px 14px rgba(30, 41, 59, 0.04);
+            border-radius: 10px;
+            box-shadow: 0 4px 14px rgba(30, 41, 59, 0.05);
         }
         
-        /* أزرار الهيدر */
-        .header-left-actions { position: absolute; left: 16px; top: 44px; display: flex; align-items: center; }
-        .header-right-actions { position: absolute; right: 16px; top: 44px; display: flex; align-items: center; }
+        /* أزرار الهيدر ومحاذاتها بدقة السنتر للمربع الجديد */
+        .header-left-actions { position: absolute; left: 16px; top: 54px; display: flex; align-items: center; }
+        .header-right-actions { position: absolute; right: 16px; top: 54px; display: flex; align-items: center; }
 
         .cart-trigger, .theme-trigger { 
             background: var(--button-gray); 
@@ -373,7 +375,7 @@
 </head>
 <body>
 
-    <!-- شاشة التحميل السوداء باللوجو الدائري المعزول كلياً وبدون أي حواف مربعات -->
+    <!-- شاشة التحميل السوداء باللوجو المربع الكبير والكامل 100% -->
     <div id="splash-screen">
         <div class="loader-content">
             <div class="loader-logo-final"></div>
@@ -392,7 +394,7 @@
                 </button>
             </div>
 
-            <!-- حاوية لوجو الهيدر الداخلي المطابق تماماً والمحمي من أطراف المربعات -->
+            <!-- حاوية لوجو الهيدر المربعة الكبيرة والمطابقة لملف الصورة الأصلي -->
             <div class="header-top">
                 <div class="header-logo-final"></div>
             </div>
