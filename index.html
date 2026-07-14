@@ -64,7 +64,7 @@
             overflow-x: hidden; 
         }
 
-        /* ================= شاشة التحميل المصلحة بالكامل والمكبرة ================= */
+        /* ================= حاوية شاشة التحميل المصلحة بالكامل وبشكل دائري ضخم ================= */
         #splash-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #000000; 
@@ -75,13 +75,29 @@
         
         .loader-content { text-align: center; padding: 20px; max-width: 90%; display: flex; flex-direction: column; align-items: center; }
         
-        /* معالجة الصورة وإجبارها على تغطية المساحة لمنع تلف الدائرة */
-        .loader-logo-big {
-            width: 160px; height: 160px; border-radius: 50%; margin-bottom: 20px; object-fit: cover; padding: 0px; 
-            border: 4px solid var(--brand-orange); background-color: #ffffff; 
+        /* الحاوية الخارجية الدائرية الفخمة باللون البرتقالي */
+        .loader-logo-wrapper {
+            width: 160px; 
+            height: 160px; 
+            border-radius: 50%; 
+            margin-bottom: 20px;
+            overflow: hidden; /* إخفاء البياض الزائد خارج الدائرة */
+            border: 4px solid var(--brand-orange);
+            background-color: #ffffff;
             box-shadow: 0 0 35px rgba(230, 81, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             animation: bounceInEntry 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, premiumPulse 2.5s infinite ease-in-out 1.2s;
-            transform: scale(0); 
+            transform: scale(0);
+        }
+
+        /* تكبير الصورة من الداخل وعمل زوم برمجياً لملء الأطراف ومنع التشويه الجانبي */
+        .loader-logo-big {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transform: scale(1.4); /* عمل زوم بنسبة 140% ليتخلص من البياض الجانبي ويصبح كبيراً جداً */
         }
         
         @keyframes bounceInEntry {
@@ -90,8 +106,8 @@
             100% { transform: scale(1); opacity: 1; }
         }
         @keyframes premiumPulse { 
-            0%, 100% { transform: scale(1); box-shadow: 0 0 35px rgba(230, 81, 0, 0.4); } 
-            50% { transform: scale(1.04); box-shadow: 0 0 55px rgba(230, 81, 0, 0.6); } 
+            0%, 100% { box-shadow: 0 0 35px rgba(230, 81, 0, 0.4); } 
+            50% { box-shadow: 0 0 55px rgba(230, 81, 0, 0.6); } 
         }
         
         .loader-text { font-weight: 800; color: #ffffff; font-size: 1.4rem; margin-bottom: 6px; text-shadow: 0 3px 8px rgba(0,0,0,0.8); animation: fadeInUp 0.8s ease-out forwards 0.3s; opacity: 0; }
@@ -102,18 +118,29 @@
         .loading-bar span { display: block; width: 0; height: 100%; background: linear-gradient(90deg, var(--brand-orange) 0%, #f97316 100%); box-shadow: 0 0 8px var(--brand-orange); border-radius: 10px; }
         .splash-hidden { transform: translateY(-100%); pointer-events: none; }
 
-        /* الهيدر المصلح والمكبر برمجياً من الداخل */
+        /* ================= الهيدر الرئيسي وتصحيح اللوجو الداخلي بالزوم البصري ================= */
         .sticky-wrapper { position: sticky; top: 0; z-index: 1000; background: var(--header-bg); box-shadow: 0 1px 10px rgba(0,0,0,0.03); }
         header { display: flex; flex-direction: column; align-items: center; padding: 14px 0; position: relative; }
         .header-top { width: 100%; display: flex; align-items: center; justify-content: center; position: relative; }
         
         .header-logo-container { 
-            width: 110px; height: 110px; border-radius: 50%; 
+            width: 105px; 
+            height: 105px; 
+            border-radius: 50%; 
             box-shadow: 0 4px 22px rgba(30, 41, 59, 0.06); 
-            overflow: hidden; display: flex; align-items: center; justify-content: center;
-            background-color: #ffffff; border: 2px solid var(--border-color);
+            overflow: hidden; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            background-color: #ffffff; 
+            border: 2px solid var(--border-color);
         }
-        .header-logo { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; padding: 0px; }
+        .header-logo { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: contain; 
+            transform: scale(1.4); /* زوم داخلي للوجو في الهيدر لملء الفراغات الجانبية المزعجة */
+        }
         
         /* أزرار الهيدر */
         .header-left-actions { position: absolute; left: 16px; top: 46px; display: flex; align-items: center; }
@@ -372,10 +399,12 @@
 </head>
 <body>
 
-    <!-- شاشة التحميل السوداء باللوجو الدائري الكبير -->
+    <!-- شاشة التحميل السوداء باللوجو الدائري الكبير والمعدل بالزوم المتقدم -->
     <div id="splash-screen">
         <div class="loader-content">
-            <img src="./images/logooo.png" class="loader-logo-big" alt="مطعم مكة">
+            <div class="loader-logo-wrapper">
+                <img src="./images/logooo.png" class="loader-logo-big" alt="مطعم مكة">
+            </div>
             <h2 class="loader-text">مطعم مكة</h2>
             <p class="loader-slogan">طعم يأخذك في حتة ثانية 🍕🔥</p>
             <div class="loader-counter" id="loadCounter">0%</div>
@@ -391,7 +420,7 @@
                 </button>
             </div>
 
-            <!-- حاوية اللوجو الدائرية الكبيرة من جوه -->
+            <!-- حاوية اللوجو الدائرية الكبيرة من جوه والمصلحة بالزوم المتقدم -->
             <div class="header-top">
                 <div class="header-logo-container">
                     <img src="./images/logooo.png" class="header-logo" alt="لوجو مطعم مكة">
