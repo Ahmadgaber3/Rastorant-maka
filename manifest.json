@@ -1,0 +1,25 @@
+{
+  "short_name": "مطعم مكة",
+  "name": "مطعم مكة | المنيو الرسمي",
+  "icons": [
+    {
+      "src": "./images/logooo.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./images/logooo.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "./index.html",
+  "background_color": "#000000",
+  "theme_color": "#e65100",
+  "display": "standalone",
+  "orientation": "portrait",
+  "dir": "rtl",
+  "lang": "ar"
+}

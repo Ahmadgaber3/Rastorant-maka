@@ -7,7 +7,7 @@
     
     <meta name="theme-color" content="#e65100">
     
-    <!-- ملف الـ manifest لتعريف التطبيق -->
+    <!-- ربط ملف الـ manifest لتعريف التطبيق -->
     <link rel="manifest" href="manifest.json">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -64,10 +64,10 @@
             overflow-x: hidden; 
         }
 
-        /* ================= شاشة التحميل: معدلة باللون الأبيض بالكامل ================= */
+        /* شاشة التحميل */
         #splash-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #ffffff; /* تم تغيير الخلفية للأبيض الصريح */
+            background: #000000; 
             z-index: 9999;
             display: flex; justify-content: center; align-items: center;
             transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
@@ -75,59 +75,50 @@
         
         .loader-content { text-align: center; padding: 20px; max-width: 90%; display: flex; flex-direction: column; align-items: center; }
         
-        /* تحويل الحاوية لمربع كبير فخم بدون حواف دائرية وبدون قص للأطراف */
-        .loader-logo-final {
-            width: 180px; /* تكبير حجم اللوجو المربع */
-            height: 180px; 
-            margin-bottom: 25px;
-            background-image: url('./images/logooo.png');
-            background-size: contain; /* إظهار الصورة المربعة بالكامل بالملي */
-            background-position: center;
-            background-repeat: no-repeat;
-            border-radius: 12px; /* شطرة خفيفة جداً وأنيقة للزوايا للحفاظ على المربع */
-            animation: bounceInEntry 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-            transform: scale(0);
-            box-shadow: 0 8px 24px rgba(230, 81, 0, 0.15);
+        .loader-logo-big {
+            width: 140px; height: 140px; border-radius: 50%; margin-bottom: 20px; object-fit: contain; padding: 12px; 
+            border: 4px solid var(--brand-orange); background-color: transparent; 
+            box-shadow: 0 0 35px rgba(230, 81, 0, 0.3);
+            animation: bounceInEntry 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, premiumPulse 2.5s infinite ease-in-out 1.2s;
+            transform: scale(0); 
         }
         
         @keyframes bounceInEntry {
             0% { transform: scale(0); opacity: 0; }
+            70% { transform: scale(1.1); opacity: 1; }
             100% { transform: scale(1); opacity: 1; }
         }
+        @keyframes premiumPulse { 
+            0%, 100% { transform: scale(1); box-shadow: 0 0 35px rgba(230, 81, 0, 0.3); } 
+            50% { transform: scale(1.04); box-shadow: 0 0 55px rgba(230, 81, 0, 0.5); } 
+        }
         
-        /* تم تغيير لون الخط للداكن ليظهر بوضوح على الخلفية البيضاء */
-        .loader-text { font-weight: 800; color: #1e293b; font-size: 1.4rem; margin-bottom: 6px; animation: fadeInUp 0.8s ease-out forwards 0.3s; opacity: 0; }
-        .loader-slogan { font-size: 0.85rem; font-weight: 700; line-height: 1.4; color: var(--brand-orange); animation: fadeInUp 0.8s ease-out forwards 0.5s; opacity: 0; }
+        .loader-text { font-weight: 800; color: #ffffff; font-size: 1.4rem; margin-bottom: 6px; text-shadow: 0 3px 8px rgba(0,0,0,0.8); animation: fadeInUp 0.8s ease-out forwards 0.3s; opacity: 0; }
+        .loader-slogan { font-size: 0.85rem; font-weight: 700; line-height: 1.4; color: var(--brand-orange); text-shadow: 0 2px 4px rgba(0,0,0,0.6); animation: fadeInUp 0.8s ease-out forwards 0.5s; opacity: 0; }
         @keyframes fadeInUp { to { transform: translateY(0); opacity: 1; } }
-        /* تم تعديل لون العداد للداكن */
-        .loader-counter { font-size: 1.1rem; font-weight: 800; color: #1e293b; margin-top: 15px; font-variant-numeric: tabular-nums; }
-        /* تم تعديل لون مسار شريط التحميل */
-        .loading-bar { width: 130px; height: 4px; background: rgba(0, 0, 0, 0.1); margin: 10px auto 0 auto; border-radius: 10px; overflow: hidden; }
+        .loader-counter { font-size: 1.1rem; font-weight: 800; color: #ffffff; margin-top: 15px; font-variant-numeric: tabular-nums; }
+        .loading-bar { width: 130px; height: 4px; background: rgba(255, 255, 255, 0.1); margin: 10px auto 0 auto; border-radius: 10px; overflow: hidden; }
         .loading-bar span { display: block; width: 0; height: 100%; background: linear-gradient(90deg, var(--brand-orange) 0%, #f97316 100%); box-shadow: 0 0 8px var(--brand-orange); border-radius: 10px; }
         .splash-hidden { transform: translateY(-100%); pointer-events: none; }
 
-        /* ================= الهيدر الداخلي: اللوجو المربع الكبير المتناسق ================= */
+        /* الهيدر */
         .sticky-wrapper { position: sticky; top: 0; z-index: 1000; background: var(--header-bg); box-shadow: 0 1px 10px rgba(0,0,0,0.03); }
         header { display: flex; flex-direction: column; align-items: center; padding: 14px 0; position: relative; }
         .header-top { width: 100%; display: flex; align-items: center; justify-content: center; position: relative; }
         
-        /* جعل لوجو الهيدر مربعاً كبيراً ومتناسقاً تماماً مع لوجو الدخلة */
-        .header-logo-final { 
-            width: 120px; /* تكبير حجم اللوجو المربع داخل الموقع */
-            height: 120px; 
-            background-image: url('./images/logooo.png');
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
-            border-radius: 10px;
-            box-shadow: 0 4px 14px rgba(30, 41, 59, 0.05);
+        .header-logo-container { 
+            width: 105px; height: 105px; border-radius: 50%; 
+            box-shadow: 0 4px 22px rgba(30, 41, 59, 0.06); 
+            overflow: hidden; display: flex; align-items: center; justify-content: center;
+            background: transparent; border: 1.5px solid var(--border-color);
         }
+        .header-logo { width: 100%; height: 100%; border-radius: 50%; object-fit: contain; padding: 4px; }
         
-        /* أزرار الهيدر ومحاذاتها بدقة السنتر للمربع الجديد */
-        .header-left-actions { position: absolute; left: 16px; top: 54px; display: flex; align-items: center; }
-        .header-right-actions { position: absolute; right: 16px; top: 54px; display: flex; align-items: center; }
+        /* أزرار الهيدر */
+        .header-left-actions { position: absolute; left: 16px; top: 42px; display: flex; align-items: center; gap: 8px; }
+        .header-right-actions { position: absolute; right: 16px; top: 42px; display: flex; align-items: center; gap: 8px; }
 
-        .cart-trigger, .theme-trigger { 
+        .cart-trigger, .theme-trigger, .install-trigger { 
             background: var(--button-gray); 
             color: var(--main-text); 
             width: 42px; 
@@ -141,6 +132,15 @@
             border: none; 
             position: relative; 
         }
+        
+        /* زر تثبيت التطبيق وتأثيره البصري المميز */
+        .install-trigger {
+            background: var(--brand-orange);
+            color: #ffffff;
+            display: none; /* يتم إظهاره بالـ JS فقط عند توفر ميزة التثبيت */
+            font-weight: bold;
+        }
+        
         .badge { position: absolute; top: -3px; right: -3px; background: var(--brand-orange); color: #ffffff; font-size: 8px; font-weight: 800; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid var(--white); transform: scale(0); }
         .badge.show { transform: scale(1); }
 
@@ -229,6 +229,7 @@
             margin-bottom: 2px;
         }
 
+        /* محدد الأحجام */
         .size-selector { 
             display: flex; 
             gap: 5px; 
@@ -315,6 +316,8 @@
 
         /* =================================================================================== */
 
+        .fly-item { position: fixed; z-index: 9999; pointer-events: none; width: 22px; height: 22px; background: var(--brand-orange); color: #ffffff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1); }
+        
         .restaurant-footer { padding: 25px 15px; text-align: center; background: var(--white); border-top: 1px solid var(--border-color); margin-top: 25px; padding-bottom: 35px; }
         
         .footer-address-bar {
@@ -340,14 +343,14 @@
 
         /* السلة والـ Modals */
         .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; display: none; justify-content: center; align-items: flex-end; backdrop-filter: blur(4px); }
-        .modal-content { background: var(--white); width: 100%; max-width: 480px; padding: 16px 20px; border-radius: 22px 22px 0 0; max-height: 82vh; overflow-y: auto; color: var(--main-text); box-shadow: 0 -5px 25px rgba(0,0,0,0.25); }
+        .modal-content { background: var(--white); width: 100%; max-width: 480px; padding: 16px 20px; border-radius: 22px 22px 0 0; max-height: 82vh; overflow-y: auto; color: var(--main-text); box-shadow: 0 -5px 25px rgba(0,0,0,0.2); }
 
         .cart-item-card { display: flex; align-items: center; gap: 10px; padding: 8px 10px; background: rgba(100, 116, 139, 0.06); border-radius: 12px; margin-bottom: 8px; }
         .cart-item-img { width: 42px; height: 42px; border-radius: 8px; object-fit: cover; }
         .cart-item-info { flex: 1; }
         .cart-item-name { font-weight: 700; font-size: 0.8rem; } 
         .cart-item-size { font-size: 0.65rem; color: var(--desc-text); display: block; }
-        .cart-item-price { color: var(--brand-orange); font-weight: 800; font-size: 0.75rem; display: block; }
+        .cart-item-info-price { color: var(--brand-orange); font-weight: 800; font-size: 0.75rem; display: block; }
         .remove-btn { color: #ff4d4d; font-weight: 800; font-size: 0.7rem; cursor: pointer; padding: 4px; }
         
         .user-fields input { background: var(--input-bg); border: 1px solid transparent; padding: 10px 12px; border-radius: 10px; width: 100%; margin-bottom: 8px; color: var(--main-text); text-align: right; font-size: 0.8rem; }
@@ -378,10 +381,10 @@
 </head>
 <body>
 
-    <!-- شاشة التحميل البيضاء باللوجو المربع الكبير والكامل 100% -->
+    <!-- شاشة التحميل السوداء باللوجو الدائري الكبير -->
     <div id="splash-screen">
         <div class="loader-content">
-            <div class="loader-logo-final"></div>
+            <img src="./images/logooo.png" class="loader-logo-big" alt="مطعم مكة">
             <h2 class="loader-text">مطعم مكة</h2>
             <p class="loader-slogan">طعم يأخذك في حتة ثانية 🍕🔥</p>
             <div class="loader-counter" id="loadCounter">0%</div>
@@ -397,12 +400,18 @@
                 </button>
             </div>
 
-            <!-- حاوية لوجو الهيدر المربعة الكبيرة والمطابقة لملف الصورة الأصلي -->
+            <!-- حاوية اللوجو الدائرية الكبيرة من جوه -->
             <div class="header-top">
-                <div class="header-logo-final"></div>
+                <div class="header-logo-container">
+                    <img src="./images/logooo.png" class="header-logo" alt="لوجو مطعم مكة">
+                </div>
             </div>
 
             <div class="header-left-actions">
+                <!-- زر التثبيت الأنيق المدمج بجوار السلة مباشرة -->
+                <button class="install-trigger" id="installAppBtn" title="تثبيت التطبيق الرسمي">
+                    📲
+                </button>
                 <button class="cart-trigger" onclick="toggleCart(true)" id="cartBtn">
                     <span class="badge" id="cartBadge">0</span>
                     <span>🛒</span>
@@ -483,6 +492,7 @@
         let menuData = [], cart = [];
         let currentTotal = 0; 
         let selectedOrderType = 'دليفري'; 
+        let deferredPrompt = null;
 
         const deliveryLocations = [
             { name: "فيصل", price: 20 }, { name: "الأمل", price: 20 }, { name: "الصباح", price: 25 },
@@ -500,7 +510,48 @@
 
         window.addEventListener('DOMContentLoaded', () => {
             loadMenu();
+            updateThemeUI(savedTheme);
             renderLocationsList();
+
+            // تسجيل الـ Service Worker الأساسي لدعم الـ PWA
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('sw.js')
+                .then(reg => console.log('تم تسجيل الـ Service Worker بنجاح!', reg))
+                .catch(err => console.log('فشل تسجيل الـ Service Worker:', err));
+            }
+
+            // لقطة التثبيت: حفظ الحدث عند توفره من المتصفح لإظهار زر التثبيت وكلمة التثبيت في الثلاث نقط
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault();
+                deferredPrompt = e;
+                const installBtn = document.getElementById('installAppBtn');
+                if (installBtn) {
+                    installBtn.style.display = 'flex'; // إظهار الزر فوراً
+                }
+            });
+
+            // معالجة الضغط على زر التثبيت
+            const installBtn = document.getElementById('installAppBtn');
+            if (installBtn) {
+                installBtn.addEventListener('click', async () => {
+                    if (!deferredPrompt) return;
+                    deferredPrompt.prompt(); // إظهار نافذة التثبيت الرسمية للمتصفح
+                    const { outcome } = await deferredPrompt.userChoice;
+                    if (outcome === 'accepted') {
+                        console.log('وافق المستخدم على تثبيت التطبيق.');
+                    }
+                    deferredPrompt = null;
+                    installBtn.style.display = 'none'; // طيران الزر فوراً بعد اتخاذ القرار
+                });
+            }
+
+            // إخفاء الزر كلياً لو تم التثبيت بالفعل بنجاح
+            window.addEventListener('appinstalled', () => {
+                console.log('تم تثبيت التطبيق بنجاح على الجهاز.');
+                const installBtn = document.getElementById('installAppBtn');
+                if (installBtn) installBtn.style.display = 'none';
+                deferredPrompt = null;
+            });
 
             document.addEventListener('click', function(e) {
                 const container = document.querySelector('.delivery-search-container');
@@ -509,12 +560,6 @@
                 }
             });
         });
-
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js').catch(err => console.log(err));
-            });
-        }
 
         // ================= Theme Toggle =================
 
@@ -574,6 +619,27 @@
             document.getElementById('deliverySearch').value = `📍 ${name} (${price} جنيه)`;
             hideLocationsDropdown();
             updateCart(); 
+        }
+
+        function setOrderType(type) {
+            selectedOrderType = type;
+            const btnDel = document.getElementById('btnDelivery');
+            const btnTak = document.getElementById('btnTakeaway');
+            const deliveryArea = document.getElementById('deliverySelectArea');
+            const addrField = document.getElementById('uAddr');
+
+            if (type === 'دليفري') {
+                btnDel.classList.add('active'); btnTak.classList.remove('active');
+                if (deliveryArea) deliveryArea.style.display = 'block';
+                if (addrField) addrField.style.display = 'block';
+            } else {
+                btnTak.classList.add('active'); btnDel.classList.remove('active');
+                if (deliveryArea) deliveryArea.style.display = 'none';
+                if (addrField) addrField.style.display = 'none';
+                selectedLocation = null; 
+                document.getElementById('deliverySearch').value = '';
+            }
+            updateCart();
         }
 
         function parseCSVLine(text) {
@@ -754,7 +820,7 @@
             let subtotal = 0; const container = document.getElementById('cartItemsList');
             container.innerHTML = cart.map((item, idx) => {
                 subtotal += parseInt(item.price, 10) || 0;
-                return `<div class="cart-item-card"><img src="${item.img}" class="cart-item-img" onerror="this.onerror=null; this.src='${IMAGES_PATH}default.jpg';"><div class="cart-item-info"><span class="cart-item-name">${item.name}</span><span class="cart-item-size">الحجم: ${item.size}</span><span class="cart-item-price">${item.price} ج.م</span></div><span class="remove-btn" onclick="removeFromCart(${idx})">حذف</span></div>`;
+                return `<div class="cart-item-card"><img src="${item.img}" class="cart-item-img" onerror="this.onerror=null; this.src='${IMAGES_PATH}default.jpg';"><div class="cart-item-info"><span class="cart-item-name">${item.name}</span><span class="cart-item-size">الحجم: ${item.size}</span><span class="cart-item-info-price">${item.price} ج.م</span></div><span class="remove-btn" onclick="removeFromCart(${idx})">حذف</span></div>`;
             }).join('');
             
             let deliveryFee = 0;
@@ -776,25 +842,24 @@
         function toggleCart(s) { const modal = document.getElementById('cartModal'); if(!modal) return; if (s) { modal.style.display = 'flex'; history.pushState({ cartOpen: true }, ""); } else { modal.style.display = 'none'; } }
         window.addEventListener('popstate', function () { const modal = document.getElementById('cartModal'); if (modal && modal.style.display === 'flex') { modal.style.display = 'none'; } });
 
-        function setOrderType(type) {
-            selectedOrderType = type;
-            const btnDel = document.getElementById('btnDelivery');
-            const btnTak = document.getElementById('btnTakeaway');
-            const deliveryArea = document.getElementById('deliverySelectArea');
-            const addrField = document.getElementById('uAddr');
+        function sendToWA() {
+            const n = document.getElementById('uName').value.trim(), p = document.getElementById('uPhone').value.trim(), a = document.getElementById('uAddr').value.trim();
+            if(!n || !p || cart.length === 0) { alert("برجاء إدخال اسمك ورقم تليفونك أولاً لتأكيد طلبك."); return; }
+            if (selectedOrderType === "دليفري" && !selectedLocation) { alert("برجاء اختيار منطقة التوصيل من قائمة البحث أولاً."); return; }
+            if (selectedOrderType === "دليفري" && !a) { alert("برجاء كتابة عنوانك بالتفصيل."); return; }
 
-            if (type === 'دليفري') {
-                btnDel.classList.add('active'); btnTak.classList.remove('active');
-                if (deliveryArea) deliveryArea.style.display = 'block';
-                if (addrField) addrField.style.display = 'block';
-            } else {
-                btnTak.classList.add('active'); btnDel.classList.remove('active');
-                if (deliveryArea) deliveryArea.style.display = 'none';
-                if (addrField) addrField.style.display = 'none';
-                selectedLocation = null; 
-                document.getElementById('deliverySearch').value = '';
-            }
-            updateCart();
+            let msg = `*طلب جديد - مطعم مكة*\n──────────────\n👤 *الاسم:* ${n}\n📱 *الموبايل:* ${p}\n🛵 *نوع الطلب:* ${selectedOrderType}\n`;
+            if (selectedOrderType === "دليفري") msg += `📍 *المنطقة:* ${selectedLocation.name}\n📍 *العنوان بالتفصيل:* ${a}\n`;
+            msg += `──────────────\n📦 *الطلبات:*\n`;
+            const summary = {}; 
+            cart.forEach(item => { const key = `${item.name} (${item.size})`; summary[key] = (summary[key] || 0) + 1; });
+            for (const [itemKey, qty] of Object.entries(summary)) msg += `• ${itemKey} × ${qty}\n`;
+            msg += `──────────────\n`;
+            const itemsSubtotal = currentTotal - (selectedLocation ? selectedLocation.price : 0);
+            msg += `💵 *المجموع الفرعي:* ${itemsSubtotal} جنيه\n`;
+            if (selectedOrderType === "دليفري") msg += `🛵 *خدمة التوصيل:* ${selectedLocation.price} جنيه\n`;
+            msg += `💰 *الإجمالي النهائي:* ${currentTotal} جنيه\n_شكراً لاختياركم مطعم مكة_ ✨`;
+            window.open(`https://wa.me/201080153176?text=${encodeURIComponent(msg)}`, '_blank');
         }
     </script>
 </body>
