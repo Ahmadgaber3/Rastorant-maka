@@ -7,7 +7,7 @@
     
     <meta name="theme-color" content="#e65100">
     
-    <!-- ربط ملف الـ manifest لتعريف التطبيق -->
+    <!-- ملف الـ manifest لتعريف التطبيق -->
     <link rel="manifest" href="manifest.json">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -75,16 +75,15 @@
         
         .loader-content { text-align: center; padding: 20px; max-width: 90%; display: flex; flex-direction: column; align-items: center; }
         
-        /* تحويل الحاوية لمربع كبير فخم بدون حواف دائرية وبدون قص للأطراف */
         .loader-logo-final {
-            width: 180px; /* تكبير حجم اللوجو المربع */
+            width: 180px; 
             height: 180px; 
             margin-bottom: 25px;
             background-image: url('./images/logooo.png');
-            background-size: contain; /* إظهار الصورة المربعة بالكامل بالملي */
+            background-size: contain; 
             background-position: center;
             background-repeat: no-repeat;
-            border-radius: 12px; /* شطرة خفيفة جداً وأنيقة للزوايا للحفاظ على المربع */
+            border-radius: 12px; 
             animation: bounceInEntry 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
             transform: scale(0);
             box-shadow: 0 8px 24px rgba(230, 81, 0, 0.15);
@@ -103,14 +102,13 @@
         .loading-bar span { display: block; width: 0; height: 100%; background: linear-gradient(90deg, var(--brand-orange) 0%, #f97316 100%); box-shadow: 0 0 8px var(--brand-orange); border-radius: 10px; }
         .splash-hidden { transform: translateY(-100%); pointer-events: none; }
 
-        /* ================= الهيدر الداخلي: اللوجو المربع الكبير المتناسق ================= */
+        /* ================= الهيدر الداخلي ================= */
         .sticky-wrapper { position: sticky; top: 0; z-index: 1000; background: var(--header-bg); box-shadow: 0 1px 10px rgba(0,0,0,0.03); }
         header { display: flex; flex-direction: column; align-items: center; padding: 14px 0; position: relative; }
         .header-top { width: 100%; display: flex; align-items: center; justify-content: center; position: relative; }
         
-        /* جعل لوجو الهيدر مربعاً كبيراً ومتناسقاً تماماً مع لوجو الدخلة */
         .header-logo-final { 
-            width: 120px; /* تكبير حجم اللوجو المربع داخل الموقع */
+            width: 120px; 
             height: 120px; 
             background-image: url('./images/logooo.png');
             background-size: contain;
@@ -120,11 +118,10 @@
             box-shadow: 0 4px 14px rgba(30, 41, 59, 0.05);
         }
         
-        /* أزرار الهيدر ومحاذاتها بدقة السنتر للمربع الجديد */
-        .header-left-actions { position: absolute; left: 16px; top: 54px; display: flex; align-items: center; gap: 8px; }
+        .header-left-actions { position: absolute; left: 16px; top: 54px; display: flex; align-items: center; }
         .header-right-actions { position: absolute; right: 16px; top: 54px; display: flex; align-items: center; }
 
-        .cart-trigger, .theme-trigger, .install-trigger { 
+        .cart-trigger, .theme-trigger { 
             background: var(--button-gray); 
             color: var(--main-text); 
             width: 42px; 
@@ -138,17 +135,44 @@
             border: none; 
             position: relative; 
         }
-
-        /* زر تثبيت التطبيق الرسمي الجديد والمميز */
-        .install-trigger {
-            background: var(--brand-orange);
-            color: #ffffff;
-            display: none; /* يتم إظهاره بالـ JS فقط عند توفر ميزة التثبيت */
-            font-weight: bold;
-        }
-
         .badge { position: absolute; top: -3px; right: -3px; background: var(--brand-orange); color: #ffffff; font-size: 8px; font-weight: 800; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid var(--white); transform: scale(0); }
         .badge.show { transform: scale(1); }
+
+        /* ================= ستايل بانر التثبيت المنبثق التلقائي الفخم ================= */
+        .install-banner-popup {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(150px);
+            width: 92%;
+            max-width: 440px;
+            background: var(--card-bg);
+            border: 2px solid var(--brand-orange);
+            border-radius: 20px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            z-index: 9998;
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
+        }
+        /* كلاس التفعيل لإظهار البانر فجأة في وش المستخدم */
+        .install-banner-popup.show-banner {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .banner-left { display: flex; align-items: center; gap: 12px; text-align: right; }
+        .banner-logo-mini { width: 48px; height: 48px; background-image: url('./images/logooo.png'); background-size: contain; background-repeat: no-repeat; background-position: center; border-radius: 8px; }
+        .banner-title { font-size: 0.9rem; font-weight: 800; color: var(--main-text); }
+        .banner-desc { font-size: 0.72rem; font-weight: 700; color: var(--desc-text); margin-top: 2px; }
+        
+        .banner-actions { display: flex; align-items: center; gap: 8px; }
+        .banner-btn-install { background: var(--brand-orange); color: #ffffff; border: none; padding: 8px 16px; border-radius: 10px; font-size: 0.8rem; font-weight: 800; cursor: pointer; white-space: nowrap; box-shadow: 0 4px 10px rgba(230, 81, 0, 0.2); }
+        .banner-btn-close { background: transparent; color: var(--desc-text); border: none; font-size: 1.1rem; cursor: pointer; padding: 4px; font-weight: bold; }
 
         /* شريط الأقسام */
         .category-nav { display: flex; overflow-x: auto; white-space: nowrap; padding: 14px 16px; gap: 16px; scrollbar-width: none; background: var(--white); border-bottom: 1px solid var(--border-color); }
@@ -321,8 +345,6 @@
 
         /* =================================================================================== */
 
-        .fly-item { position: fixed; z-index: 9999; pointer-events: none; width: 22px; height: 22px; background: var(--brand-orange); color: #ffffff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1); }
-        
         .restaurant-footer { padding: 25px 15px; text-align: center; background: var(--white); border-top: 1px solid var(--border-color); margin-top: 25px; padding-bottom: 35px; }
         
         .footer-address-bar {
@@ -397,6 +419,21 @@
         </div>
     </div>
 
+    <!-- ================= بانر التثبيت المنبثق التلقائي الفخم الجديد ================= -->
+    <div class="install-banner-popup" id="automaticInstallBanner">
+        <div class="banner-left">
+            <div class="banner-logo-mini"></div>
+            <div>
+                <div class="banner-title">تطبيق مطعم مكة الرسمى</div>
+                <div class="banner-desc">ثبته الآن لتجربة تصفح أسرع وأسهل 🔥</div>
+            </div>
+        </div>
+        <div class="banner-actions">
+            <button class="banner-btn-install" id="actionInstallBtn">تثبيت</button>
+            <button class="banner-btn-close" id="actionCloseBtn">✕</button>
+        </div>
+    </div>
+
     <div class="sticky-wrapper">
         <header>
             <div class="header-right-actions">
@@ -411,10 +448,6 @@
             </div>
 
             <div class="header-left-actions">
-                <!-- زر التثبيت الأنيق المدمج بجوار السلة مباشرة -->
-                <button class="install-trigger" id="installAppBtn" title="تثبيت التطبيق الرسمي">
-                    📲 تثبيت
-                </button>
                 <button class="cart-trigger" onclick="toggleCart(true)" id="cartBtn">
                     <span class="badge" id="cartBadge">0</span>
                     <span>🛒</span>
@@ -515,43 +548,56 @@
             loadMenu();
             renderLocationsList();
 
-            // تسجيل الـ Service Worker الأساسي لدعم الـ PWA
+            // 1. تسجيل الـ Service Worker الأساسي لدعم الـ PWA
             if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.register('sw.js')
                 .then(reg => console.log('تم تسجيل الـ Service Worker بنجاح!', reg))
                 .catch(err => console.log('فشل تسجيل الـ Service Worker:', err));
             }
 
-            // لقطة التثبيت: التقاط الحدث لإظهار زر التثبيت اليدوي وتفعيل خيار التثبيت في قائمة الثلاث نقط للمتصفح
+            // 2. لقطة التثبيت الفورية: إظهار البانر المنبثق في وش المستخدم تلقائياً
             window.addEventListener('beforeinstallprompt', (e) => {
                 e.preventDefault();
                 deferredPrompt = e;
-                const installBtn = document.getElementById('installAppBtn');
-                if (installBtn) {
-                    installBtn.style.display = 'inline-flex'; // إظهار الزر فوراً
+                
+                // إظهار البانر المنبثق الاحترافي فوراً في أسفل الشاشة
+                const bannerPopup = document.getElementById('automaticInstallBanner');
+                if (bannerPopup) {
+                    bannerPopup.classList.add('show-banner');
                 }
             });
 
-            // معالجة الضغط على زر التثبيت
-            const installBtn = document.getElementById('installAppBtn');
-            if (installBtn) {
-                installBtn.addEventListener('click', async () => {
+            // 3. معالجة الضغط على زر التثبيت داخل البانر
+            const actionInstallBtn = document.getElementById('actionInstallBtn');
+            if (actionInstallBtn) {
+                actionInstallBtn.addEventListener('click', async () => {
                     if (!deferredPrompt) return;
-                    deferredPrompt.prompt(); // إظهار نافذة التثبيت الرسمية للمتصفح
+                    deferredPrompt.prompt(); // فتح صفحة نافذة التثبيت الرسمية للمتصفح
                     const { outcome } = await deferredPrompt.userChoice;
                     if (outcome === 'accepted') {
-                        console.log('وافق المستخدم على تثبيت التطبيق.');
+                        console.log('وافق المستخدم على التثبيت.');
                     }
                     deferredPrompt = null;
-                    installBtn.style.display = 'none'; // طيران واختفاء الزر فوراً بعد اتخاذ القرار
+                    // إخفاء البانر فوراً وطيرانه
+                    const bannerPopup = document.getElementById('automaticInstallBanner');
+                    if (bannerPopup) bannerPopup.classList.remove('show-banner');
                 });
             }
 
-            // إخفاء الزر كلياً لو تم التثبيت بالفعل بنجاح من أي مكان (سواء الزر أو الثلاث نقط)
+            // 4. إغلاق البانر يدوياً لو المستخدم ضغط على علامة (✕)
+            const actionCloseBtn = document.getElementById('actionCloseBtn');
+            if (actionCloseBtn) {
+                actionCloseBtn.addEventListener('click', () => {
+                    const bannerPopup = document.getElementById('automaticInstallBanner');
+                    if (bannerPopup) bannerPopup.classList.remove('show-banner');
+                });
+            }
+
+            // 5. حماية مطلقة: لو الأبلكيشن مثبت بالفعل على الجهاز اطرد البانر ولا تظهره نهائياً
             window.addEventListener('appinstalled', () => {
-                console.log('تم تثبيت التطبيق بنجاح على الجهاز.');
-                const installBtn = document.getElementById('installAppBtn');
-                if (installBtn) installBtn.style.display = 'none';
+                console.log('تم التثبيت بالفعل بنجاح.');
+                const bannerPopup = document.getElementById('automaticInstallBanner');
+                if (bannerPopup) bannerPopup.classList.remove('show-banner');
                 deferredPrompt = null;
             });
 
@@ -621,6 +667,27 @@
             document.getElementById('deliverySearch').value = `📍 ${name} (${price} جنيه)`;
             hideLocationsDropdown();
             updateCart(); 
+        }
+
+        function setOrderType(type) {
+            selectedOrderType = type;
+            const btnDel = document.getElementById('btnDelivery');
+            const btnTak = document.getElementById('btnTakeaway');
+            const deliveryArea = document.getElementById('deliverySelectArea');
+            const addrField = document.getElementById('uAddr');
+
+            if (type === 'دليفري') {
+                btnDel.classList.add('active'); btnTak.classList.remove('active');
+                if (deliveryArea) deliveryArea.style.display = 'block';
+                if (addrField) addrField.style.display = 'block';
+            } else {
+                btnTak.classList.add('active'); btnDel.classList.remove('active');
+                if (deliveryArea) deliveryArea.style.display = 'none';
+                if (addrField) addrField.style.display = 'none';
+                selectedLocation = null; 
+                document.getElementById('deliverySearch').value = '';
+            }
+            updateCart();
         }
 
         function parseCSVLine(text) {
